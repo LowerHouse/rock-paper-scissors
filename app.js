@@ -1,16 +1,20 @@
-const options = ['rock', 'paper', 'scissors']
+const OPTIONS = ['rock', 'paper', 'scissors']
 
 function getComputerChoice(){
-    return options[Math.floor(((Math.random() * 3)))]
+    return OPTIONS[Math.floor(((Math.random() * 3)))]
 }
-
+let gameBtn = document.querySelectorAll('.gameBtn')
+console.log(gameBtn)
+let body = document.querySelector('body')
+let div = document.createElement('div')
+body.appendChild(div)
 let playerSelection;
 let computerSelection;
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase()
-    player = options.findIndex((element) => element === playerSelection)
-    computer = options.findIndex((element) => element === computerSelection)
+    player = OPTIONS.findIndex((element) => element === playerSelection)
+    computer = OPTIONS.findIndex((element) => element === computerSelection)
     
     if(player == computer +1 | player == computer - 2){
         return `You Win! ${playerSelection} beats ${computerSelection}`
@@ -25,11 +29,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game(){
-    for( let i = 0; i<5; i++){
-        playerSelection = prompt()
+gameBtn.forEach(btn => {
+    btn.addEventListener('click', function(){
         computerSelection = getComputerChoice()
-        console.log(playRound(playerSelection, computerSelection))
-    }
-}
-game()
+        div.textContent = playRound(this.textContent, computerSelection)
+    })})
